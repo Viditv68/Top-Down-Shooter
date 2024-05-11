@@ -7,7 +7,7 @@ public class PlayerMovement : MonoBehaviour
     private PlayerControls controls;
 
     private CharacterController characterController;
-
+    [SerializeField] private Player player;
     [SerializeField] private Animator animator;
     [Header("Movement Info")]
     [SerializeField] private float walkSpeed;
@@ -27,26 +27,11 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 aimInput;
 
 
-    private void Awake()
-    {
-        AssignInputEvents();
-    }
-
-
-    private void OnEnable()
-    {
-        controls.Enable();
-    }
-
-    private void OnDisable()
-    {
-        controls.Disable();
-    }
-
     private void Start()
     {
         characterController = GetComponent<CharacterController>();
         speed = walkSpeed;
+        AssignInputEvents();
     }
 
     private void Update()
@@ -84,7 +69,7 @@ public class PlayerMovement : MonoBehaviour
             lookingDirection.Normalize();
 
             transform.forward = lookingDirection;
-            aim.position = new Vector3(hitInfo.point.x, transform.position.y, hitInfo.point.z);
+            aim.position = new Vector3(hitInfo.point.x, aim.position.y, hitInfo.point.z);
         }
     }
 
@@ -112,7 +97,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void AssignInputEvents()
     {
-        controls = new PlayerControls();
+        controls = player.controls;
         controls.Character.Movement.performed += context => moveInput = context.ReadValue<Vector2>();
         controls.Character.Movement.canceled += context => moveInput = Vector2.zero;
 
