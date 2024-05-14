@@ -4,8 +4,13 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public PlayerControls controls;
+    public PlayerControls controls { get; private set; }
+    [SerializeField] private PlayerAim aim;
 
+
+    #region [ ======= Getters =========]
+    public PlayerAim GetPlayerAim() => aim;
+    #endregion
 
     private void Awake()
     {

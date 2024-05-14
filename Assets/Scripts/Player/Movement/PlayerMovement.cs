@@ -1,4 +1,5 @@
 using System;
+using UnityEditor.PackageManager;
 using UnityEngine;
 
 
@@ -17,14 +18,7 @@ public class PlayerMovement : MonoBehaviour
     private float verticalVelocity;
     private bool isRunning;
 
-    [Header("Aim Info")]
-    [SerializeField] private Transform aim;
-    [SerializeField] private LayerMask aimLayerMask;
-    private Vector3 lookingDirection;
-
-
     private Vector2 moveInput;
-    private Vector2 aimInput;
 
 
     private void Start()
@@ -38,7 +32,7 @@ public class PlayerMovement : MonoBehaviour
     {
 
         ApplyMovement();
-        AimTowardsMouse();
+        ApplyRotation();
         AnimatorControllers();
 
     }
@@ -58,19 +52,15 @@ public class PlayerMovement : MonoBehaviour
 
 
 
-    private void AimTowardsMouse()
+    private void ApplyRotation()
     {
-        Ray ray = Camera.main.ScreenPointToRay(aimInput);
+        Vector3 lookingDirection = player.GetPlayerAim().GetMousePosition() - transform.position;
+        lookingDirection.y = 0f;
+        lookingDirection.Normalize();
 
-        if (Physics.Raycast(ray, out var hitInfo, Mathf.Infinity, aimLayerMask))
-        {
-            lookingDirection = hitInfo.point - transform.position;
-            lookingDirection.y = 0f;
-            lookingDirection.Normalize();
+        transform.forward = lookingDirection;
 
-            transform.forward = lookingDirection;
-            aim.position = new Vector3(hitInfo.point.x, aim.position.y, hitInfo.point.z);
-        }
+      
     }
 
     private void ApplyMovement()
@@ -94,15 +84,11 @@ public class PlayerMovement : MonoBehaviour
             verticalVelocity = -0.5f;
     }
 
-
     private void AssignInputEvents()
     {
         controls = player.controls;
         controls.Character.Movement.performed += context => moveInput = context.ReadValue<Vector2>();
         controls.Character.Movement.canceled += context => moveInput = Vector2.zero;
-
-        controls.Character.Aim.performed += context => aimInput = context.ReadValue<Vector2>();
-        controls.Character.Aim.canceled += context => aimInput = Vector2.zero;
 
         controls.Character.Run.performed += context =>
         {
