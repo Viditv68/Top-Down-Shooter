@@ -819,9 +819,11 @@ MonoBehaviour:
   autoRifle: {fileID: 1550802881}
   shotgun: {fileID: 1897715435}
   rifle: {fileID: 1906207283}
-  leftHand: {fileID: 1313405406}
+  leftHandIKTarget: {fileID: 1313405406}
+  leftHandIK: {fileID: 1894222175}
+  leftHandIKWeightIncreaseRate: 2.5
   rig: {fileID: 1405605932}
-  rigIncreaseStep: 2.5
+  rigWeightIncreaseRate: 2.75
 --- !u!1 &1156786681
 GameObject:
   m_ObjectHideFlags: 0

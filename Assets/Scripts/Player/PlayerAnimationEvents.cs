@@ -4,11 +4,24 @@ using UnityEngine;
 
 public class PlayerAnimationEvents : MonoBehaviour
 {
-    [SerializeField] private WeaponVisualController weaponVisualController;
+    [SerializeField] private PlayerWeaponVisuals weaponVisualController;
 
 
     public void ReloadIsOver()
     {
-        weaponVisualController.ReturnRigWeightToOne();
+        weaponVisualController.MaximizeRigWeight();
+    }
+
+    public void ReturnRig()
+    {
+        weaponVisualController.MaximizeRigWeight();
+        weaponVisualController.MaximizeLeftHandWeight();
+
+    }
+
+    public void WeaponGrabIsOver()
+    {
+
+        weaponVisualController.SetBusyGrabbingWeapon(false);
     }
 }
