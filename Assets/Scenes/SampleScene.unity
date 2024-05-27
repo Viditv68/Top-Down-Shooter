@@ -1717,10 +1717,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 4205225991748480229}
   player: {fileID: 1140953458}
+  currentWeapon:
+    weaponType: 0
+    ammo: 0
+    maxAmmo: 0
   bulletPrefab: {fileID: 5426326406339439425, guid: d6db80f7616451a44be0b907130a78a9, type: 3}
   bulletSpeed: 15
   gunPoint: {fileID: 677287683}
   weaponHolder: {fileID: 1488277104}
+  weaponSlots:
+  - weaponType: 0
+    ammo: 21
+    maxAmmo: 21
+  - weaponType: 1
+    ammo: 6
+    maxAmmo: 6
 --- !u!114 &1140953460
 MonoBehaviour:
   m_ObjectHideFlags: 0

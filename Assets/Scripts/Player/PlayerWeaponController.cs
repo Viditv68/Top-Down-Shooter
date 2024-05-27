@@ -8,6 +8,9 @@ public class PlayerWeaponController : MonoBehaviour
 
     [SerializeField] private Player player;
 
+
+    [SerializeField] private Weapon currentWeapon;
+
     [Header("Bullet Info")]
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private float bulletSpeed;
@@ -16,15 +19,53 @@ public class PlayerWeaponController : MonoBehaviour
 
     [SerializeField] private Transform weaponHolder;
 
+    [Header("Inventory")]
+    [SerializeField] private List<Weapon> weaponSlots;
+
     private PlayerAim playerAim => player.GetPlayerAim();
 
     private void Start()
     {
-        player.controls.Character.Fire.performed += context => Shoot();
+        AssignInputEvents();
+
+        currentWeapon.ammo = currentWeapon.maxAmmo;
     }
+
+    private void AssignInputEvents()
+    {
+        PlayerControls controls = player.controls;
+        controls.Character.Fire.performed += context => Shoot();
+        controls.Character.EquipSlot1.performed += context => EquipWeapon(0);
+        controls.Character.EquipSlot2.performed += context => EquipWeapon(1);
+        controls.Character.DropCurrentWeapon.performed += context => DropWeapon();
+    }
+
+    private void EquipWeapon(int _index)
+    {
+        currentWeapon = weaponSlots[_index];
+    }
+
+    private void DropWeapon()
+    {
+        if (weaponSlots.Count <= 1) 
+            return;
+
+        weaponSlots.Remove(currentWeapon);
+
+        currentWeapon = weaponSlots[0];
+
+    }
+
+
 
     private void Shoot()
     {
+        if (currentWeapon.ammo <= 0)
+        {
+            Debug.Log("No more bullets");
+            return;
+        }
+        currentWeapon.ammo--;
 
         GameObject bullet = Instantiate(bulletPrefab, gunPoint.position, Quaternion.LookRotation(gunPoint.forward));
        
