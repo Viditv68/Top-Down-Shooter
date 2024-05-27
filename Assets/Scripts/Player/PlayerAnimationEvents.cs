@@ -5,11 +5,13 @@ using UnityEngine;
 public class PlayerAnimationEvents : MonoBehaviour
 {
     [SerializeField] private PlayerWeaponVisuals weaponVisualController;
+    [SerializeField] private PlayerWeaponController weaponController;
 
 
     public void ReloadIsOver()
     {
         weaponVisualController.MaximizeRigWeight();
+        weaponController.CurrentWeapon().RefillBullets();
     }
 
     public void ReturnRig()

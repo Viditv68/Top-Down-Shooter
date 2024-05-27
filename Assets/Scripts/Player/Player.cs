@@ -8,11 +8,14 @@ public class Player : MonoBehaviour
     [SerializeField] private PlayerAim aim;
     [SerializeField] private PlayerMovement playerMovement;
     [SerializeField] private PlayerWeaponController playerWeaponController;
+    [SerializeField] private PlayerWeaponVisuals playerWeaponVisuals;
 
 
     #region [ ======= Getters =========]
     public PlayerAim GetPlayerAim() => aim;
     public PlayerMovement GetPlayerMovement() => playerMovement;
+
+    public PlayerWeaponVisuals GetPlayerWeaponVisuals() => playerWeaponVisuals;
 
     public PlayerWeaponController GetPlayerWeaponController() => playerWeaponController;
     #endregion
