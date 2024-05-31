@@ -12,6 +12,7 @@ public class PlayerWeaponVisuals : MonoBehaviour
 
 
     [SerializeField] private WeaponModel[] weaponModels;
+    [SerializeField] private BackupWeaponModel[] backupWeaponModels;
 
 
     [Header("Left hand IK")]
@@ -54,8 +55,6 @@ public class PlayerWeaponVisuals : MonoBehaviour
 
     }
 
-
-
     public void PlayReloadAnimation()
     {
         if (isGrabbingWeapon)
@@ -86,6 +85,11 @@ public class PlayerWeaponVisuals : MonoBehaviour
 
     public void SwitchOnCurrentWeaponModel()
     {
+        SwitchOffWeaponModels();
+        SwitchOffBackupWeaponModels();
+        if(!player.GetPlayerWeaponController().HasOnlyOneWeapon())
+            SwitchOnBackUpWeaponModel();
+
         SwitchAnimationLayer((int)CurrentWeaponModel().holdType);
         CurrentWeaponModel().gameObject.SetActive(true);
 
@@ -97,6 +101,27 @@ public class PlayerWeaponVisuals : MonoBehaviour
         for (int i = 0; i < weaponModels.Length; i++)
         {
             weaponModels[i].gameObject.SetActive(false);
+        }
+    }
+
+    private void SwitchOffBackupWeaponModels()
+    {
+        foreach (BackupWeaponModel weapon in backupWeaponModels)
+        {
+            weapon.gameObject.SetActive(false);
+        }
+    }
+
+    public void SwitchOnBackUpWeaponModel()
+    {
+        WeaponType weaponType = player.GetPlayerWeaponController().BackupWeapon().weaponType;
+
+        foreach (BackupWeaponModel weapon in backupWeaponModels)
+        {
+            if(weapon.weaponType == weaponType)
+            {
+                weapon.gameObject.SetActive(true);
+            }
         }
     }
 
