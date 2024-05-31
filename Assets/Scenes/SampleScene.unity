@@ -2693,7 +2693,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponType: 2
-  grabType: 1
+  equipAnimationType: 1
   holdType: 1
   gunPoint: {fileID: 1117827291}
   holdPoint: {fileID: 1704855966}
@@ -2832,7 +2832,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponType: 0
-  grabType: 0
+  equipAnimationType: 0
   holdType: 1
   gunPoint: {fileID: 677287683}
   holdPoint: {fileID: 1650745102}
@@ -2885,7 +2885,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponType: 1
-  grabType: 0
+  equipAnimationType: 0
   holdType: 1
   gunPoint: {fileID: 242166506}
   holdPoint: {fileID: 1817189779}
@@ -3652,7 +3652,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponType: 3
-  grabType: 1
+  equipAnimationType: 1
   holdType: 2
   gunPoint: {fileID: 8928490}
   holdPoint: {fileID: 1750411639}
@@ -3706,7 +3706,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponType: 4
-  grabType: 1
+  equipAnimationType: 1
   holdType: 3
   gunPoint: {fileID: 795886769}
   holdPoint: {fileID: 17950065}

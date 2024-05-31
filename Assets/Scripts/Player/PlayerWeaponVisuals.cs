@@ -8,7 +8,7 @@ public class PlayerWeaponVisuals : MonoBehaviour
     [SerializeField] private Player player;
     [SerializeField] private Animator anim;
 
-    private bool isGrabbingWeapon;
+    private bool isEquippingWeapon;
 
 
     [SerializeField] private WeaponModel[] weaponModels;
@@ -39,6 +39,7 @@ public class PlayerWeaponVisuals : MonoBehaviour
         UpdateLeftHandIKWeight();
     }
 
+
     public WeaponModel CurrentWeaponModel()
     {
         WeaponModel weaponModel = null;
@@ -57,30 +58,34 @@ public class PlayerWeaponVisuals : MonoBehaviour
 
     public void PlayReloadAnimation()
     {
-        if (isGrabbingWeapon)
+        if (isEquippingWeapon)
             return;
 
+        float reloadSpeed = player.GetPlayerWeaponController().CurrentWeapon().reloadSpeed;
+        anim.SetFloat("ReloadSpeed", reloadSpeed);
         anim.SetTrigger("Reload");
         ReduceRigWeight();
     }
 
     public void PlayWeaponEquipAnimation()
     {
-        GrabType grabType = CurrentWeaponModel().grabType;
+        EquipType equipType = CurrentWeaponModel().equipAnimationType;
 
+        float equipmentSpeed = player.GetPlayerWeaponController().CurrentWeapon().equipmentSpeed;
 
         leftHandIK.weight = 0;
         ReduceRigWeight();
-        anim.SetFloat("WeaponGrabType", ((float)grabType));
-        anim.SetTrigger("WeaponGrab");
+        anim.SetTrigger("EquipWeapon");
+        anim.SetFloat("EquipType", ((float)equipType));
+        anim.SetFloat("EquipSpeed", equipmentSpeed);
 
         SetBusyGrabbingWeapon(true);
     }
 
     public void SetBusyGrabbingWeapon(bool _isBusy)
     {
-        isGrabbingWeapon = _isBusy;
-        anim.SetBool("BusyGrabbingWeapon", isGrabbingWeapon);
+        isEquippingWeapon = _isBusy;
+        anim.SetBool("BusyEquippingWeapon", isEquippingWeapon);
     }
 
     public void SwitchOnCurrentWeaponModel()
