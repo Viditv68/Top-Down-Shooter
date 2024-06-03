@@ -8,9 +8,6 @@ public class PlayerWeaponVisuals : MonoBehaviour
     [SerializeField] private Player player;
     [SerializeField] private Animator anim;
 
-    private bool isEquippingWeapon;
-
-
     [SerializeField] private WeaponModel[] weaponModels;
     [SerializeField] private BackupWeaponModel[] backupWeaponModels;
 
@@ -58,9 +55,6 @@ public class PlayerWeaponVisuals : MonoBehaviour
 
     public void PlayReloadAnimation()
     {
-        if (isEquippingWeapon)
-            return;
-
         float reloadSpeed = player.GetPlayerWeaponController().CurrentWeapon().reloadSpeed;
         anim.SetFloat("ReloadSpeed", reloadSpeed);
         anim.SetTrigger("Reload");
@@ -79,14 +73,8 @@ public class PlayerWeaponVisuals : MonoBehaviour
         anim.SetFloat("EquipType", ((float)equipType));
         anim.SetFloat("EquipSpeed", equipmentSpeed);
 
-        SetBusyGrabbingWeapon(true);
     }
 
-    public void SetBusyGrabbingWeapon(bool _isBusy)
-    {
-        isEquippingWeapon = _isBusy;
-        anim.SetBool("BusyEquippingWeapon", isEquippingWeapon);
-    }
 
     public void SwitchOnCurrentWeaponModel()
     {

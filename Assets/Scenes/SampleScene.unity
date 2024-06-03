@@ -817,6 +817,7 @@ MonoBehaviour:
     totalReserveAmmo: 0
     reloadSpeed: 1
     equipmentSpeed: 1
+    fireRate: 1
 --- !u!1 &785151449
 GameObject:
   m_ObjectHideFlags: 0
@@ -2017,24 +2018,26 @@ MonoBehaviour:
     totalReserveAmmo: 0
     reloadSpeed: 1
     equipmentSpeed: 1
+    fireRate: 1
   bulletPrefab: {fileID: 5426326406339439425, guid: d6db80f7616451a44be0b907130a78a9, type: 3}
   bulletSpeed: 15
-  gunPoint: {fileID: 677287683}
   weaponHolder: {fileID: 1488277104}
   maxSlots: 2
   weaponSlots:
   - weaponType: 0
-    bulletsInMagazines: 20
-    magazineCapacity: 20
+    bulletsInMagazines: 50
+    magazineCapacity: 50
     totalReserveAmmo: 1000
     reloadSpeed: 1
     equipmentSpeed: 1
-  - weaponType: 2
-    bulletsInMagazines: 0
-    magazineCapacity: 0
-    totalReserveAmmo: 20
+    fireRate: 5
+  - weaponType: 4
+    bulletsInMagazines: 50
+    magazineCapacity: 50
+    totalReserveAmmo: 200
     reloadSpeed: 1
     equipmentSpeed: 1
+    fireRate: 1
 --- !u!114 &1140953460
 MonoBehaviour:
   m_ObjectHideFlags: 0
