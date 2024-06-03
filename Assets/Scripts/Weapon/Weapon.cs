@@ -1,5 +1,6 @@
 
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public enum WeaponType
 {
@@ -22,6 +23,10 @@ public enum ShootType
 public class Weapon
 {
     public WeaponType weaponType;
+    [Header("Shoot info")]
+    public ShootType shootType;
+    public float fireRate = 1f;
+    private float lastShootTime;
 
     [Header("Magzines Info")]
     public int bulletsInMagazines;
@@ -33,13 +38,45 @@ public class Weapon
     [Range(1f, 2f)]
     public float equipmentSpeed = 1f;
 
-    [Header("Shoot info")]
-    public ShootType shootType;
-    public float fireRate = 1f;
-    private float lastShootTime;
+    [Header("Spread")]
+    public float baseSpread;
+    public float currentSpread = 2f;
+    public float maximumSpread = 3f;
+    public float spreadIncreaseRate = 0.15f;
+
+    private float lastSpreadUpdateTime;
+    private float spreadCooldown = 1f;
 
 
+    #region [ ========== Spread Bullet =============]
 
+    public Vector3 ApplySpread(Vector3 _originalDirection)
+    {
+        UpdateSpread();
+        float randomizeValue = Random.Range(-currentSpread, currentSpread);
+        Quaternion spreadRotation = Quaternion.Euler(randomizeValue, randomizeValue, randomizeValue);
+
+        return spreadRotation * _originalDirection;
+    }
+
+    private void UpdateSpread()
+    {
+        if(Time.time > lastSpreadUpdateTime + spreadCooldown)
+            currentSpread = baseSpread;
+        else
+            IncreaseSpread();
+
+        lastSpreadUpdateTime = Time.time;
+
+    }
+
+    private void IncreaseSpread()
+    {
+        currentSpread = Mathf.Clamp(currentSpread + spreadIncreaseRate, baseSpread, maximumSpread);
+    }
+
+
+    #endregion
     public bool CanShoot()
     {
         if(HaveEnoughBullets() && ReadyToFire())

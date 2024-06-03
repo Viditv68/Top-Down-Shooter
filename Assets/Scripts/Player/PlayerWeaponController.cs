@@ -113,7 +113,10 @@ public class PlayerWeaponController : MonoBehaviour
         bullet.transform.position = GunPoint().position;
         bullet.transform.rotation = Quaternion.LookRotation(GunPoint().forward);
 
-        bullet.GetComponent<Rigidbody>().velocity = BulletDirection() * bulletSpeed;
+
+        Vector3 bulletDirection = currentWeapon.ApplySpread(BulletDirection());
+
+        bullet.GetComponent<Rigidbody>().velocity = bulletDirection * bulletSpeed;
         animator.SetTrigger("Fire");
         
     }
