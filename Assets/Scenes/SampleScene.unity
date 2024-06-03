@@ -813,7 +813,14 @@ MonoBehaviour:
   weapon:
     weaponType: 2
     shootType: 0
+    bulletPerShot: 1
+    defaultFireRate: 1
     fireRate: 1
+    burstAvailable: 0
+    burstActive: 0
+    burstBulletsPerShot: 5
+    burstFireRate: 0
+    burstFireDelay: 0.1
     bulletsInMagazines: 0
     magazineCapacity: 0
     totalReserveAmmo: 0
@@ -2019,7 +2026,14 @@ MonoBehaviour:
   currentWeapon:
     weaponType: 0
     shootType: 0
+    bulletPerShot: 1
+    defaultFireRate: 1
     fireRate: 3
+    burstAvailable: 0
+    burstActive: 0
+    burstBulletsPerShot: 5
+    burstFireRate: 0
+    burstFireDelay: 0.1
     bulletsInMagazines: 0
     magazineCapacity: 0
     totalReserveAmmo: 0
@@ -2036,7 +2050,14 @@ MonoBehaviour:
   weaponSlots:
   - weaponType: 0
     shootType: 0
+    bulletPerShot: 1
+    defaultFireRate: 1
     fireRate: 3
+    burstAvailable: 0
+    burstActive: 0
+    burstBulletsPerShot: 5
+    burstFireRate: 0
+    burstFireDelay: 0.1
     bulletsInMagazines: 50
     magazineCapacity: 50
     totalReserveAmmo: 1000
@@ -2048,15 +2069,41 @@ MonoBehaviour:
     spreadIncreaseRate: 0.15
   - weaponType: 2
     shootType: 1
-    fireRate: 7
+    bulletPerShot: 1
+    defaultFireRate: 10
+    fireRate: 10
+    burstAvailable: 1
+    burstActive: 0
+    burstBulletsPerShot: 3
+    burstFireRate: 1.5
+    burstFireDelay: 0.1
     bulletsInMagazines: 50
     magazineCapacity: 50
     totalReserveAmmo: 200
     reloadSpeed: 1
     equipmentSpeed: 1
-    baseSpread: 0.5
+    baseSpread: 0
     currentSpread: 0.5
-    maximumSpread: 3
+    maximumSpread: 2
+    spreadIncreaseRate: 0.15
+  - weaponType: 3
+    shootType: 0
+    bulletPerShot: 5
+    defaultFireRate: 1
+    fireRate: 1
+    burstAvailable: 0
+    burstActive: 0
+    burstBulletsPerShot: 5
+    burstFireRate: 0
+    burstFireDelay: 0.1
+    bulletsInMagazines: 50
+    magazineCapacity: 50
+    totalReserveAmmo: 200
+    reloadSpeed: 1
+    equipmentSpeed: 1
+    baseSpread: 15
+    currentSpread: 0.5
+    maximumSpread: 15
     spreadIncreaseRate: 0.15
 --- !u!114 &1140953460
 MonoBehaviour:

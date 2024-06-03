@@ -53,6 +53,8 @@ public class PlayerWeaponVisuals : MonoBehaviour
 
     }
 
+
+    public void PlayFireAnimation() => anim.SetTrigger("Fire");
     public void PlayReloadAnimation()
     {
         float reloadSpeed = player.GetPlayerWeaponController().CurrentWeapon().reloadSpeed;

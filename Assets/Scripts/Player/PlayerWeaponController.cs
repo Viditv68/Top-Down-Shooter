@@ -40,6 +40,9 @@ public class PlayerWeaponController : MonoBehaviour
     {
         if (isShooting)
             Shoot();
+
+        if (Input.GetKeyDown(KeyCode.T))
+            currentWeapon.ToggleBurst();
         
     }
 
@@ -100,15 +103,46 @@ public class PlayerWeaponController : MonoBehaviour
 
     public bool HasOnlyOneWeapon() => weaponSlots.Count <= 1;
 
+    private IEnumerator BurstFire()
+    {
+        SetWeaponReady(false);
+        for (int i = 0; i < currentWeapon.bulletPerShot; i++)
+        {
+            FireSingleBullet();
+
+            yield return new WaitForSeconds(currentWeapon.burstFireDelay);
+
+            if (i >= currentWeapon.bulletPerShot - 1)
+                SetWeaponReady(true);
+        }
+    }
+
+
+
     private void Shoot()
     {
         if (!currentWeapon.CanShoot() || !WeaponReady())
             return;
 
+        player.GetPlayerWeaponVisuals().PlayFireAnimation();
+
         if (currentWeapon.shootType == ShootType.Single)
             isShooting = false;
-            
-        //GameObject bullet = Instantiate(bulletPrefab, gunPoint.position, Quaternion.LookRotation(gunPoint.forward));
+
+
+        if(currentWeapon.BurstActivated())
+        {
+            StartCoroutine(BurstFire());
+            return;
+        }
+        
+        FireSingleBullet();
+
+    }
+
+    private void FireSingleBullet()
+    {
+        currentWeapon.bulletsInMagazines--;
         GameObject bullet = ObjectPool.instance.GetBullet();
         bullet.transform.position = GunPoint().position;
         bullet.transform.rotation = Quaternion.LookRotation(GunPoint().forward);
@@ -117,8 +151,6 @@ public class PlayerWeaponController : MonoBehaviour
         Vector3 bulletDirection = currentWeapon.ApplySpread(BulletDirection());
 
         bullet.GetComponent<Rigidbody>().velocity = bulletDirection * bulletSpeed;
-        animator.SetTrigger("Fire");
-        
     }
 
     public Vector3 BulletDirection()
