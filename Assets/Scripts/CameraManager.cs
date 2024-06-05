@@ -12,6 +12,9 @@ public class CameraManager : MonoBehaviour
     
     private CinemachineFramingTransposer transposer;
 
+
+    [Header("Camera Distance")]
+    [SerializeField] private bool canChangeCameraDistance;
     [SerializeField] private float distanceChangeRate;
     private float targetCameraDistance;
 
@@ -33,6 +36,9 @@ public class CameraManager : MonoBehaviour
 
     private void UpdateCameraDistance()
     {
+        if (!canChangeCameraDistance)
+            return;
+
         float currentDistance = transposer.m_CameraDistance;
         if (Mathf.Abs(targetCameraDistance - currentDistance) > 0.1f)
             transposer.m_CameraDistance = Mathf.Lerp(currentDistance, targetCameraDistance, distanceChangeRate * Time.deltaTime);

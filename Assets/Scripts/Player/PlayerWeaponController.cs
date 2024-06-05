@@ -40,10 +40,6 @@ public class PlayerWeaponController : MonoBehaviour
     {
         if (isShooting)
             Shoot();
-
-        if (Input.GetKeyDown(KeyCode.T))
-            currentWeapon.ToggleBurst();
-        
     }
 
 
@@ -108,15 +104,15 @@ public class PlayerWeaponController : MonoBehaviour
 
     public bool HasOnlyOneWeapon() => weaponSlots.Count <= 1;
 
-    public bool HasWeaponTypeInInventory(WeaponType _weaponType)
+    public Weapon WeaponInSlots(WeaponType _weaponType)
     {
         foreach(Weapon weapon in weaponSlots)
         {
             if (weapon.weaponType == _weaponType)
-                return true;
+                return weapon;
         }
 
-        return false;
+        return null;
     }
 
     private IEnumerator BurstFire()
@@ -186,16 +182,6 @@ public class PlayerWeaponController : MonoBehaviour
 
     public Weapon CurrentWeapon() => currentWeapon;
 
-    public Weapon BackupWeapon()
-    {
-        foreach (Weapon weapon in weaponSlots)
-        {
-            if (weapon != currentWeapon)
-                return weapon;
-        }
-
-        return null;
-    }
 
 
     #region [ ========= Input Events ========]
@@ -205,6 +191,8 @@ public class PlayerWeaponController : MonoBehaviour
         PlayerControls controls = player.controls;
         controls.Character.Fire.performed += context => isShooting = true;
         controls.Character.Fire.canceled += context => isShooting = false;
+
+        controls.Character.ToggleWeaponMode.performed += Context => currentWeapon.ToggleBurst();
 
         controls.Character.EquipSlot1.performed += context => EquipWeapon(0);
         controls.Character.EquipSlot2.performed += context => EquipWeapon(1);
