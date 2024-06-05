@@ -709,6 +709,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponType: 2
+  hangType: 1
 --- !u!1 &724212098
 GameObject:
   m_ObjectHideFlags: 0
@@ -3236,8 +3237,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1592964667}
-  m_LocalRotation: {x: 0.58322406, y: -0.2261848, z: 0.2545572, w: 0.7374896}
-  m_LocalPosition: {x: 0.157, y: -0.042, z: -0.088}
+  m_LocalRotation: {x: -0.04815015, y: -0.8756722, z: 0.22923857, w: 0.4222906}
+  m_LocalPosition: {x: 0.0369, y: -0.17, z: 0.0062}
   m_LocalScale: {x: 0.9, y: 0.9, z: 0.9}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3245,7 +3246,7 @@ Transform:
   - {fileID: 4886200025212509124}
   m_Father: {fileID: 3715035882488136154}
   m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 77.264, y: -9.58, z: 30.423}
+  m_LocalEulerAnglesHint: {x: 21.15, y: -125.248, z: 17.338}
 --- !u!114 &1592964669
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3259,6 +3260,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponType: 3
+  hangType: 0
 --- !u!1 &1595591233
 GameObject:
   m_ObjectHideFlags: 0
@@ -3487,6 +3489,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponType: 4
+  hangType: 1
 --- !u!1 &1704855965
 GameObject:
   m_ObjectHideFlags: 0
@@ -3829,7 +3832,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponType: 3
-  equipAnimationType: 1
+  equipAnimationType: 0
   holdType: 2
   gunPoint: {fileID: 8928490}
   holdPoint: {fileID: 1750411639}
@@ -3934,6 +3937,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponType: 1
+  hangType: 2
 --- !u!1 &1975087308
 GameObject:
   m_ObjectHideFlags: 0
@@ -4162,6 +4166,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponType: 0
+  hangType: 2
 --- !u!1 &24755291647313150
 GameObject:
   m_ObjectHideFlags: 0

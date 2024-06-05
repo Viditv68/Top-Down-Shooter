@@ -58,6 +58,9 @@ public class PlayerWeaponController : MonoBehaviour
 
     private void EquipWeapon(int _index)
     {
+        if(_index >= weaponSlots.Count) 
+            return;
+        
         SetWeaponReady(false);
         currentWeapon = weaponSlots[_index];
         player.GetPlayerWeaponVisuals().PlayWeaponEquipAnimation();
@@ -104,6 +107,17 @@ public class PlayerWeaponController : MonoBehaviour
     #endregion
 
     public bool HasOnlyOneWeapon() => weaponSlots.Count <= 1;
+
+    public bool HasWeaponTypeInInventory(WeaponType _weaponType)
+    {
+        foreach(Weapon weapon in weaponSlots)
+        {
+            if (weapon.weaponType == _weaponType)
+                return true;
+        }
+
+        return false;
+    }
 
     private IEnumerator BurstFire()
     {
@@ -194,6 +208,11 @@ public class PlayerWeaponController : MonoBehaviour
 
         controls.Character.EquipSlot1.performed += context => EquipWeapon(0);
         controls.Character.EquipSlot2.performed += context => EquipWeapon(1);
+        controls.Character.EquipSlot3.performed += context => EquipWeapon(2);
+        controls.Character.EquipSlot4.performed += context => EquipWeapon(3);
+        controls.Character.EquipSlot5.performed += context => EquipWeapon(4);
+
+
         controls.Character.DropCurrentWeapon.performed += context => DropWeapon();
         controls.Character.Reload.performed += context =>
         {
