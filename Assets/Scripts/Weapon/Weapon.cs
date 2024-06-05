@@ -46,6 +46,8 @@ public class Weapon
     public float reloadSpeed = 1f;
     [Range(1f, 2f)]
     public float equipmentSpeed = 1f;
+    [Range(2f, 12f)]
+    public float gunDistance = 4f;
 
     [Header("Spread")]
     public float baseSpread;

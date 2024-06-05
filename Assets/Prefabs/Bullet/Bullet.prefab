@@ -177,7 +177,7 @@ TrailRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Time: 0.5
+  m_Time: 0.25
   m_PreviewTimeScale: 1
   m_Parameters:
     serializedVersion: 3
@@ -262,3 +262,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 5282966445940649939}
   bulletImpactFX: {fileID: 7052640879781374213, guid: e8627537dda81b143a0871d18a94d2f6, type: 3}
+  trailRenderer: {fileID: 4349292221701381292}
+  meshRenderer: {fileID: 475357865873203629}
+  collider: {fileID: 4412110123017554890}

@@ -826,6 +826,7 @@ MonoBehaviour:
     totalReserveAmmo: 0
     reloadSpeed: 1
     equipmentSpeed: 1
+    gunDistance: 4
     baseSpread: 0
     currentSpread: 2
     maximumSpread: 3
@@ -1439,7 +1440,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 68.6
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -2039,6 +2040,7 @@ MonoBehaviour:
     totalReserveAmmo: 0
     reloadSpeed: 1
     equipmentSpeed: 1
+    gunDistance: 4
     baseSpread: 0
     currentSpread: 2
     maximumSpread: 3
@@ -2063,6 +2065,7 @@ MonoBehaviour:
     totalReserveAmmo: 1000
     reloadSpeed: 1
     equipmentSpeed: 1
+    gunDistance: 4
     baseSpread: 0
     currentSpread: 2
     maximumSpread: 3
@@ -2082,6 +2085,7 @@ MonoBehaviour:
     totalReserveAmmo: 200
     reloadSpeed: 1
     equipmentSpeed: 1
+    gunDistance: 4
     baseSpread: 0
     currentSpread: 0.5
     maximumSpread: 2
@@ -2101,6 +2105,7 @@ MonoBehaviour:
     totalReserveAmmo: 200
     reloadSpeed: 1
     equipmentSpeed: 1
+    gunDistance: 4
     baseSpread: 15
     currentSpread: 0.5
     maximumSpread: 15
@@ -2698,7 +2703,7 @@ MonoBehaviour:
   m_LookAt: {fileID: 0}
   m_Follow: {fileID: 840638490}
   m_Lens:
-    FieldOfView: 60
+    FieldOfView: 68.6
     OrthographicSize: 5
     NearClipPlane: 0.3
     FarClipPlane: 1000

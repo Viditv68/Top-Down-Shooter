@@ -143,14 +143,15 @@ public class PlayerWeaponController : MonoBehaviour
     private void FireSingleBullet()
     {
         currentWeapon.bulletsInMagazines--;
-        GameObject bullet = ObjectPool.instance.GetBullet();
-        bullet.transform.position = GunPoint().position;
-        bullet.transform.rotation = Quaternion.LookRotation(GunPoint().forward);
+        GameObject bulletObj = ObjectPool.instance.GetBullet();
+        bulletObj.transform.position = GunPoint ().position;
+        bulletObj.transform.rotation = Quaternion.LookRotation(GunPoint().forward);
 
-
+        Bullet bullet = bulletObj.GetComponent<Bullet>();
+        bullet.BulletSetup(currentWeapon.gunDistance);
         Vector3 bulletDirection = currentWeapon.ApplySpread(BulletDirection());
 
-        bullet.GetComponent<Rigidbody>().velocity = bulletDirection * bulletSpeed;
+        bulletObj.GetComponent<Rigidbody>().velocity = bulletDirection * bulletSpeed;
     }
 
     public Vector3 BulletDirection()
