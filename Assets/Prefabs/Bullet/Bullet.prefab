@@ -264,4 +264,4 @@ MonoBehaviour:
   bulletImpactFX: {fileID: 7052640879781374213, guid: e8627537dda81b143a0871d18a94d2f6, type: 3}
   trailRenderer: {fileID: 4349292221701381292}
   meshRenderer: {fileID: 475357865873203629}
-  collider: {fileID: 4412110123017554890}
+  cd: {fileID: 4412110123017554890}

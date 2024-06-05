@@ -48,6 +48,8 @@ public class Weapon
     public float equipmentSpeed = 1f;
     [Range(2f, 12f)]
     public float gunDistance = 4f;
+    [Range(3f, 8f)]
+    public float cameraDistance = 6f;
 
     [Header("Spread")]
     public float baseSpread;

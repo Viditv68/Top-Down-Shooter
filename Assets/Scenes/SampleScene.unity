@@ -718,6 +718,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 724212099}
+  - component: {fileID: 724212100}
   m_Layer: 0
   m_Name: Camera
   m_TagString: Untagged
@@ -742,6 +743,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &724212100
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 724212098}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16267720a86f5cb49b440ac8c8165f82, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  virtualCamera: {fileID: 1479963725}
+  distanceChangeRate: 0.5
 --- !u!1 &779522647
 GameObject:
   m_ObjectHideFlags: 0
@@ -827,6 +842,7 @@ MonoBehaviour:
     reloadSpeed: 1
     equipmentSpeed: 1
     gunDistance: 4
+    cameraDistance: 6
     baseSpread: 0
     currentSpread: 2
     maximumSpread: 3
@@ -1440,7 +1456,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 68.6
+  field of view: 60
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -2041,6 +2057,7 @@ MonoBehaviour:
     reloadSpeed: 1
     equipmentSpeed: 1
     gunDistance: 4
+    cameraDistance: 6
     baseSpread: 0
     currentSpread: 2
     maximumSpread: 3
@@ -2066,6 +2083,7 @@ MonoBehaviour:
     reloadSpeed: 1
     equipmentSpeed: 1
     gunDistance: 4
+    cameraDistance: 6
     baseSpread: 0
     currentSpread: 2
     maximumSpread: 3
@@ -2086,6 +2104,7 @@ MonoBehaviour:
     reloadSpeed: 1
     equipmentSpeed: 1
     gunDistance: 4
+    cameraDistance: 7
     baseSpread: 0
     currentSpread: 0.5
     maximumSpread: 2
@@ -2106,6 +2125,7 @@ MonoBehaviour:
     reloadSpeed: 1
     equipmentSpeed: 1
     gunDistance: 4
+    cameraDistance: 3
     baseSpread: 15
     currentSpread: 0.5
     maximumSpread: 15
@@ -2703,7 +2723,7 @@ MonoBehaviour:
   m_LookAt: {fileID: 0}
   m_Follow: {fileID: 840638490}
   m_Lens:
-    FieldOfView: 68.6
+    FieldOfView: 60
     OrthographicSize: 5
     NearClipPlane: 0.3
     FarClipPlane: 1000
