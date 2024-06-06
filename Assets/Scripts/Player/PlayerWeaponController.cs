@@ -155,7 +155,7 @@ public class PlayerWeaponController : MonoBehaviour
     private void FireSingleBullet()
     {
         currentWeapon.bulletsInMagazines--;
-        GameObject bulletObj = ObjectPool.instance.GetBullet();
+        GameObject bulletObj = ObjectPool.instance.GetObject(bulletPrefab);
         bulletObj.transform.position = GunPoint ().position;
         bulletObj.transform.rotation = Quaternion.LookRotation(GunPoint().forward);
 
