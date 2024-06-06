@@ -8,6 +8,8 @@ public class PlayerWeaponController : MonoBehaviour
 
     [SerializeField] private Player player;
 
+    [SerializeField] private WeaponData defaultWeaponData;
+
 
     [SerializeField] private Weapon currentWeapon;
 
@@ -47,7 +49,8 @@ public class PlayerWeaponController : MonoBehaviour
 
     private void EquipStartingWeapon()
     {
-        EquipWeapon(0);
+        weaponSlots[0] = new Weapon(defaultWeaponData);
+        //EquipWeapon(0);
     }
 
 
@@ -75,7 +78,7 @@ public class PlayerWeaponController : MonoBehaviour
 
     }
 
-    public void PickupWeapon(Weapon _newWeapon)
+    public void PickupWeapon(WeaponData _newWeapon)
     {
         if(weaponSlots.Count >= maxSlots)
         {
@@ -83,7 +86,9 @@ public class PlayerWeaponController : MonoBehaviour
             return;
         }
 
-        weaponSlots.Add(_newWeapon);
+        Weapon newWeapon = new Weapon(_newWeapon);
+
+        weaponSlots.Add(newWeapon);
         player.GetPlayerWeaponVisuals().SwitchOnBackUpWeaponModel();
     }
 

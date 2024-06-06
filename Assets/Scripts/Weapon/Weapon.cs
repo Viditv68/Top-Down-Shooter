@@ -23,42 +23,85 @@ public enum ShootType
 public class Weapon
 {
     public WeaponType weaponType;
-    [Header("Shoot info")]
+
     public ShootType shootType;
-    public int bulletPerShot = 1;
-    public float defaultFireRate = 1f;
-    public float fireRate = 1f;
+    public int bulletPerShot { get; private set; }
+
+    #region [======= Regular Mode Variables =========]
+    private float defaultFireRate;
+    public float fireRate;
     private float lastShootTime;
 
-    [Header("Burst Fire")]
-    public bool burstAvailable = false;
-    public bool burstActive = false;
-    public int burstBulletsPerShot = 5;
-    public float burstFireRate;
-    public float burstFireDelay = 0.1f;
+    #endregion
+
+    #region [========= Burst Variables ===========]
+    private bool burstAvailable;
+    public bool burstActive;
+    private int burstBulletsPerShot;
+    private float burstFireRate = 0.1f;
+    public float burstFireDelay { get; private set; }
+
+#endregion
 
     [Header("Magzines Info")]
     public int bulletsInMagazines;
     public int magazineCapacity;
     public int totalReserveAmmo;
 
-    [Range(1f,2f)]
-    public float reloadSpeed = 1f;
-    [Range(1f, 2f)]
-    public float equipmentSpeed = 1f;
-    [Range(2f, 12f)]
-    public float gunDistance = 4f;
-    [Range(3f, 8f)]
-    public float cameraDistance = 6f;
+
+    #region [======== Weapon Generic Info ==========]
+
+    public float reloadSpeed { get; private set; }
+    public float equipmentSpeed { get; private set; }
+    public float gunDistance { get; private set; }
+    public float cameraDistance { get; private set; }
+    #endregion
+
+    #region [====== Weapon Spread Variables =========]
 
     [Header("Spread")]
-    public float baseSpread;
-    public float currentSpread = 2f;
-    public float maximumSpread = 3f;
-    public float spreadIncreaseRate = 0.15f;
+    private float baseSpread;
+    private float currentSpread;
+    private float maximumSpread;
+    private float spreadIncreaseRate;
 
     private float lastSpreadUpdateTime;
-    private float spreadCooldown = 1f;
+    private float spreadCooldown;
+
+    #endregion
+
+
+    public Weapon(WeaponData _weaponData)
+    {
+
+        bulletsInMagazines = _weaponData.bulletsInMagazines;
+        magazineCapacity = _weaponData.magazineCapacity;
+        totalReserveAmmo = _weaponData.totalReserveAmmo;
+
+        fireRate = _weaponData.fireRate;
+        weaponType = _weaponData.weaponType;
+
+        bulletPerShot = _weaponData.bulletPerShot;
+        shootType = _weaponData.shootType;
+
+        burstAvailable = _weaponData.burstAvailable;
+        burstActive = _weaponData.burstActive;
+        bulletPerShot = _weaponData.burstBulletsPerShot;
+        burstFireRate = _weaponData.burstFireRate;
+        burstFireDelay = _weaponData.burstFireDelay;
+
+
+        baseSpread = _weaponData.baseSpread;
+        maximumSpread = _weaponData.maximumSpread;
+        spreadIncreaseRate = _weaponData.spreadIncreaseRate;
+
+        reloadSpeed = _weaponData.reloadSpeed;
+        equipmentSpeed = _weaponData.equipmentSpeed;
+        gunDistance = _weaponData.gunDistance;
+        cameraDistance = _weaponData.cameraDistance;
+
+        defaultFireRate = fireRate;
+    }
 
 
     #region [ ========== Burst ===========]
