@@ -9,6 +9,7 @@ public class Player : MonoBehaviour
     [SerializeField] private PlayerMovement playerMovement;
     [SerializeField] private PlayerWeaponController playerWeaponController;
     [SerializeField] private PlayerWeaponVisuals playerWeaponVisuals;
+    [SerializeField] private PlayerInteraction interaction;
 
 
     #region [ ======= Getters =========]
@@ -18,6 +19,8 @@ public class Player : MonoBehaviour
     public PlayerWeaponVisuals GetPlayerWeaponVisuals() => playerWeaponVisuals;
 
     public PlayerWeaponController GetPlayerWeaponController() => playerWeaponController;
+
+    public PlayerInteraction GetPlayerInteratction() => interaction;
     #endregion
 
     private void Awake()

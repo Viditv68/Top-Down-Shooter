@@ -60,7 +60,6 @@ public class PlayerMovement : MonoBehaviour
         lookingDirection.Normalize();
         
         Quaternion desiredRotation = Quaternion.LookRotation(lookingDirection);
-        Debug.Log(desiredRotation);
         transform.rotation = Quaternion.Slerp(transform.rotation, desiredRotation, turnSpeed * Time.deltaTime);
 
       

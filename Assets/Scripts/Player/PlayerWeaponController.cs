@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
 
 public class PlayerWeaponController : MonoBehaviour
@@ -80,13 +81,24 @@ public class PlayerWeaponController : MonoBehaviour
 
     public void PickupWeapon(WeaponData _newWeapon)
     {
-        if(weaponSlots.Count >= maxSlots)
+        Weapon newWeapon = new Weapon(_newWeapon);
+
+        if(WeaponInSlots(newWeapon.weaponType) != null)
         {
-            Debug.Log("No slots available");
+            WeaponInSlots(newWeapon.weaponType).totalReserveAmmo += newWeapon.bulletsInMagazines;
             return;
         }
 
-        Weapon newWeapon = new Weapon(_newWeapon);
+        if(weaponSlots.Count >= maxSlots &&  newWeapon.weaponType != currentWeapon.weaponType)
+        {
+            int weaponIndex = weaponSlots.IndexOf(currentWeapon);
+
+            player.GetPlayerWeaponVisuals().SwitchOffWeaponModels();
+            weaponSlots[weaponIndex] = newWeapon;
+            EquipWeapon(weaponIndex);
+            return;
+        }
+
 
         weaponSlots.Add(newWeapon);
         player.GetPlayerWeaponVisuals().SwitchOnBackUpWeaponModel();

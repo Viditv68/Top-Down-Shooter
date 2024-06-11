@@ -134,6 +134,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Interaction"",
+                    ""type"": ""Button"",
+                    ""id"": ""086355ab-b75a-490f-8f73-be24f8925dd1"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -312,6 +321,17 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""Toggle Weapon Mode"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4a214bc4-d9ff-4523-b82c-b83f310af6b4"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Interaction"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -332,6 +352,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_Character_DropCurrentWeapon = m_Character.FindAction("Drop Current Weapon", throwIfNotFound: true);
         m_Character_Reload = m_Character.FindAction("Reload", throwIfNotFound: true);
         m_Character_ToggleWeaponMode = m_Character.FindAction("Toggle Weapon Mode", throwIfNotFound: true);
+        m_Character_Interaction = m_Character.FindAction("Interaction", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -405,6 +426,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Character_DropCurrentWeapon;
     private readonly InputAction m_Character_Reload;
     private readonly InputAction m_Character_ToggleWeaponMode;
+    private readonly InputAction m_Character_Interaction;
     public struct CharacterActions
     {
         private @PlayerControls m_Wrapper;
@@ -421,6 +443,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @DropCurrentWeapon => m_Wrapper.m_Character_DropCurrentWeapon;
         public InputAction @Reload => m_Wrapper.m_Character_Reload;
         public InputAction @ToggleWeaponMode => m_Wrapper.m_Character_ToggleWeaponMode;
+        public InputAction @Interaction => m_Wrapper.m_Character_Interaction;
         public InputActionMap Get() { return m_Wrapper.m_Character; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -466,6 +489,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @ToggleWeaponMode.started += instance.OnToggleWeaponMode;
             @ToggleWeaponMode.performed += instance.OnToggleWeaponMode;
             @ToggleWeaponMode.canceled += instance.OnToggleWeaponMode;
+            @Interaction.started += instance.OnInteraction;
+            @Interaction.performed += instance.OnInteraction;
+            @Interaction.canceled += instance.OnInteraction;
         }
 
         private void UnregisterCallbacks(ICharacterActions instance)
@@ -506,6 +532,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @ToggleWeaponMode.started -= instance.OnToggleWeaponMode;
             @ToggleWeaponMode.performed -= instance.OnToggleWeaponMode;
             @ToggleWeaponMode.canceled -= instance.OnToggleWeaponMode;
+            @Interaction.started -= instance.OnInteraction;
+            @Interaction.performed -= instance.OnInteraction;
+            @Interaction.canceled -= instance.OnInteraction;
         }
 
         public void RemoveCallbacks(ICharacterActions instance)
@@ -537,5 +566,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnDropCurrentWeapon(InputAction.CallbackContext context);
         void OnReload(InputAction.CallbackContext context);
         void OnToggleWeaponMode(InputAction.CallbackContext context);
+        void OnInteraction(InputAction.CallbackContext context);
     }
 }
