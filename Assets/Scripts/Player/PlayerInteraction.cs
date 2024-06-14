@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerInteraction : MonoBehaviour
 {
     [SerializeField] private Player player;
-    public List<Interactable> interactables;
+    private List<Interactable> interactables = new List<Interactable>();
 
     private Interactable ClosestInteractable;
 
@@ -18,6 +18,9 @@ public class PlayerInteraction : MonoBehaviour
     private void InteractWithClosest()
     {
         ClosestInteractable?.Interaction();
+        interactables.Remove(ClosestInteractable);
+
+        UpdateClosestInteractable();
     }
 
     public void UpdateClosestInteractable()
@@ -40,4 +43,6 @@ public class PlayerInteraction : MonoBehaviour
 
         ClosestInteractable?.HighlightActive(true);
     }
+
+    public List<Interactable> GetInteractables() => interactables;
 }

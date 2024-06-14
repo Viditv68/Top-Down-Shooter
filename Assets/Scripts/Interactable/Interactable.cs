@@ -37,7 +37,7 @@ public class Interactable : MonoBehaviour
         PlayerInteraction playerInteraction = other.GetComponent<PlayerInteraction>();
         if(playerInteraction != null )
         {
-            playerInteraction.interactables.Add(this);
+            playerInteraction.GetInteractables().Add(this);
             playerInteraction.UpdateClosestInteractable();
         }
     }
@@ -48,7 +48,7 @@ public class Interactable : MonoBehaviour
         PlayerInteraction playerInteraction = other.GetComponent<PlayerInteraction>();
         if (playerInteraction != null)
         {
-            playerInteraction.interactables.Remove(this);
+            playerInteraction.GetInteractables().Remove(this);
             playerInteraction.UpdateClosestInteractable();
         }
     }

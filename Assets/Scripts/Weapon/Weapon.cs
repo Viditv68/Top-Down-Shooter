@@ -71,8 +71,11 @@ public class Weapon
     #endregion
 
 
+    public WeaponData weaponData { get; private set; }
+
     public Weapon(WeaponData _weaponData)
     {
+        weaponData = _weaponData;
 
         bulletsInMagazines = _weaponData.bulletsInMagazines;
         magazineCapacity = _weaponData.magazineCapacity;
@@ -101,6 +104,7 @@ public class Weapon
         cameraDistance = _weaponData.cameraDistance;
 
         defaultFireRate = fireRate;
+
     }
 
 

@@ -25,6 +25,8 @@ public class PlayerWeaponController : MonoBehaviour
     [SerializeField] private int maxSlots = 2;
     [SerializeField] private List<Weapon> weaponSlots;
 
+    [SerializeField] private GameObject weaponPickupPrefab;
+
     private bool weaponReady;
     private bool isShooting;
 
@@ -70,8 +72,10 @@ public class PlayerWeaponController : MonoBehaviour
 
     private void DropWeapon()
     {
-        if (HasOnlyOneWeapon()) 
+        if (HasOnlyOneWeapon())
             return;
+
+        CreateWeaponOnTheGround();
 
         weaponSlots.Remove(currentWeapon);
 
@@ -79,28 +83,35 @@ public class PlayerWeaponController : MonoBehaviour
 
     }
 
-    public void PickupWeapon(WeaponData _newWeapon)
+    private void CreateWeaponOnTheGround()
     {
-        Weapon newWeapon = new Weapon(_newWeapon);
+        GameObject droppedWeapon = ObjectPool.instance.GetObject(weaponPickupPrefab);
+        droppedWeapon.GetComponent<PickupWeapon>()?.SetupPickupWeapon(currentWeapon, transform);
+    }
 
-        if(WeaponInSlots(newWeapon.weaponType) != null)
+    public void PickupWeapon(Weapon _newWeapon)
+    {
+
+
+        if(WeaponInSlots(_newWeapon.weaponType) != null)
         {
-            WeaponInSlots(newWeapon.weaponType).totalReserveAmmo += newWeapon.bulletsInMagazines;
+            WeaponInSlots(_newWeapon.weaponType).totalReserveAmmo += _newWeapon.bulletsInMagazines;
             return;
         }
 
-        if(weaponSlots.Count >= maxSlots &&  newWeapon.weaponType != currentWeapon.weaponType)
+        if(weaponSlots.Count >= maxSlots && _newWeapon.weaponType != currentWeapon.weaponType)
         {
             int weaponIndex = weaponSlots.IndexOf(currentWeapon);
 
             player.GetPlayerWeaponVisuals().SwitchOffWeaponModels();
-            weaponSlots[weaponIndex] = newWeapon;
+            weaponSlots[weaponIndex] = _newWeapon;
+            CreateWeaponOnTheGround();
             EquipWeapon(weaponIndex);
             return;
         }
 
 
-        weaponSlots.Add(newWeapon);
+        weaponSlots.Add(_newWeapon);
         player.GetPlayerWeaponVisuals().SwitchOnBackUpWeaponModel();
     }
 
