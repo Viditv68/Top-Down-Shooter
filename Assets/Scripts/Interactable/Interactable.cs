@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Interactable : MonoBehaviour
 {
+    protected PlayerWeaponController weaponController;
     protected MeshRenderer mesh;
     protected Material defaultMaterial;
     [SerializeField] private Material highlightMaterial;
@@ -34,6 +35,10 @@ public class Interactable : MonoBehaviour
 
     protected virtual void OnTriggerEnter(Collider other)
     {
+
+        if (weaponController == null)
+            weaponController = other.GetComponent<PlayerWeaponController>();
+
         PlayerInteraction playerInteraction = other.GetComponent<PlayerInteraction>();
         if(playerInteraction != null )
         {

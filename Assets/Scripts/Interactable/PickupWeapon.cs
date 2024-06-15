@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class PickupWeapon : Interactable
 {
-    private PlayerWeaponController weaponController;
+
     [SerializeField] private WeaponData weaponData;
     [SerializeField] private Weapon weapon;
 
@@ -20,7 +20,7 @@ public class PickupWeapon : Interactable
         if(!oldWeapon)
             weapon = new Weapon(weaponData);
 
-        UpdateGameObject();
+        SetupGameObject();
     }
 
 
@@ -35,13 +35,13 @@ public class PickupWeapon : Interactable
 
 
     [ContextMenu("Update Item Model")]
-    public void UpdateGameObject()
+    public void SetupGameObject()
     {
         gameObject.name = "PickupWeapon - " + weaponData.weaponType.ToString();
-        UpdateItemModel();
+        SetupWeaponModel();
     }
 
-    public void UpdateItemModel()
+    private void SetupWeaponModel()
     {
         foreach (BackupWeaponModel model in models)
         {
@@ -60,16 +60,5 @@ public class PickupWeapon : Interactable
         ObjectPool.instance.ReturnObject(gameObject);
     }
 
-    protected override void OnTriggerEnter(Collider other)
-    {
-        base.OnTriggerEnter(other);
-
-        if(weaponController == null)
-            weaponController = other.GetComponent<PlayerWeaponController>();
-    }
-
-    protected override void OnTriggerExit(Collider other)
-    {
-        base.OnTriggerExit(other);
-    }
+  
 }
