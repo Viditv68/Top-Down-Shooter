@@ -11,6 +11,8 @@ public class EnemyState
 
     protected string animBoolName;
 
+    protected float stateTimer;
+
 
     public EnemyState(Enemy _enemyBase, EnemyStateMachine _stateMachine, string _animBoolName)
     {
@@ -21,17 +23,16 @@ public class EnemyState
 
     public virtual void Enter()
     {
-        Debug.Log("I enter " + animBoolName);
+
     }
 
     public virtual void Update()
     {
-        Debug.Log("I am runniung " + animBoolName);
+        stateTimer -= Time.deltaTime;
     }
 
     public virtual void Exit()
     {
-        Debug.Log("I exit " + animBoolName);
 
     }
 }
