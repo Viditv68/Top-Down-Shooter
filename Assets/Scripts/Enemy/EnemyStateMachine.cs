@@ -8,7 +8,6 @@ public class EnemyStateMachine
 
     public void Initialize(EnemyState _startState)
     {
-        Debug.Log("DIle state");
         currentState = _startState;
 
         currentState.Enter();
@@ -16,8 +15,10 @@ public class EnemyStateMachine
 
     public void ChangeState(EnemyState _newState)
     {
+        Debug.Log("previous state: " + currentState);
         currentState.Exit();
         currentState = _newState;
+        Debug.Log("Current state: " + currentState);
         currentState.Enter();
     }
 }

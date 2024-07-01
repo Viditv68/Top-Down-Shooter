@@ -15,6 +15,9 @@ public class MeleeMoveState : EnemyState
     {
         base.Enter();
         destination = enemy.GetPatrolDestination();
+
+
+        enemy.agent.SetDestination(destination);
     }
 
     public override void Exit()
@@ -27,7 +30,6 @@ public class MeleeMoveState : EnemyState
     {
         base.Update();
 
-        enemy.agent.SetDestination(destination);
         if(enemy.agent.remainingDistance <= 1 )
         {
             stateMachine.ChangeState(enemy.idleState);
