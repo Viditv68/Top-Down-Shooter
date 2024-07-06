@@ -29,6 +29,14 @@ public class MeleeIdleState : EnemyState
             Debug.Log("Changed to move state " + stateTimer);
             stateMachine.ChangeState(enemy.moveState);
         }
-            
+
+
+        if (enemy.PlayerInAgressionRange())
+        {
+            stateMachine.ChangeState(enemy.recoveryState);
+            return;
+        }
+
+
     }
 }

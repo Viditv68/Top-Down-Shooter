@@ -7,11 +7,14 @@ public class EnemyMelee : Enemy
     public MeleeIdleState idleState { get; private set; } 
     public MeleeMoveState moveState { get; private set; }
 
+    public MeleeRecoveryState recoveryState { get; private set; }
+
     protected override void Awake()
     {
         base.Awake();
         idleState = new MeleeIdleState(this, stateMachine, "Idle");
         moveState = new MeleeMoveState(this, stateMachine, "Move");
+        recoveryState = new MeleeRecoveryState(this, stateMachine, "Recovery");
     }
 
     protected override void Start()

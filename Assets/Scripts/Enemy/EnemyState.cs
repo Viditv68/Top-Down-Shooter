@@ -13,6 +13,7 @@ public class EnemyState
 
     protected float stateTimer;
 
+    protected bool triggerCalled;
 
     public EnemyState(Enemy _enemyBase, EnemyStateMachine _stateMachine, string _animBoolName)
     {
@@ -26,6 +27,7 @@ public class EnemyState
         Debug.Log(animBoolName);
 
         enemyBase.anim.SetBool(animBoolName, true);
+        triggerCalled = false;
     }
 
     public virtual void Update()
@@ -37,4 +39,12 @@ public class EnemyState
     {
         enemyBase.anim.SetBool(animBoolName, false);
     }
+
+
+    #region [======= Animation Events =======]
+
+    public void AnimationTrigger() => triggerCalled = true;
+
+
+    #endregion
 }
