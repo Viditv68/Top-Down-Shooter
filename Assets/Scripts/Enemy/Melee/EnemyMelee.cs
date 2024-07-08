@@ -9,6 +9,11 @@ public class EnemyMelee : Enemy
 
     public MeleeRecoveryState recoveryState { get; private set; }
     public MeleeChaseState chaseState { get; private set; }
+    public MeleeAttackState attackState { get; private set; }
+
+
+    [SerializeField] private Transform hiddenWeapon;
+    [SerializeField] private Transform pulledWeapon;
 
 
     protected override void Awake()
@@ -18,6 +23,7 @@ public class EnemyMelee : Enemy
         moveState = new MeleeMoveState(this, stateMachine, "Move");
         recoveryState = new MeleeRecoveryState(this, stateMachine, "Recovery");
         chaseState = new MeleeChaseState(this, stateMachine, "Chase");
+        attackState = new MeleeAttackState(this, stateMachine, "Attack");
     }
 
     protected override void Start()
@@ -33,5 +39,11 @@ public class EnemyMelee : Enemy
         base.Update();
 
         stateMachine.currentState.Update();
+    }
+
+    public void PullWeapon()
+    {
+        hiddenWeapon.gameObject.SetActive(false);
+        pulledWeapon.gameObject.SetActive(true);
     }
 }
