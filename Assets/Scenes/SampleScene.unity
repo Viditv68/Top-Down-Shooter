@@ -1396,7 +1396,8 @@ MonoBehaviour:
   turnSpeed: 5
   agressionRange: 4
   idleTime: 2
-  moveSpeed: 0
+  moveSpeed: 1.5
+  chaseSpeed: 2.5
   patrolPoints:
   - {fileID: 527930286}
   - {fileID: 422430863}
@@ -12039,6 +12040,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 727234c619d73684ea07dd99f5ec5609, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemy: {fileID: 652893598}
 --- !u!33 &5898382812793406730
 MeshFilter:
   m_ObjectHideFlags: 0

@@ -29,7 +29,7 @@ public class MeleeRecoveryState : EnemyState
 
         if(triggerCalled)
         {
-
+            stateMachine.ChangeState(enemy.chaseState);
         }
     }
 }

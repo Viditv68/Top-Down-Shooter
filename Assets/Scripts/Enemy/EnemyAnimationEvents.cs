@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class EnemyAnimationEvents : MonoBehaviour
 {
-    private Enemy enemy;
+    public Enemy enemy;
 
     private void Awake()
     {
-        enemy = GetComponent<Enemy>();
+
     }
 
     public void AnimationTrigger() => enemy.Animationtrigger();
