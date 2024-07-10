@@ -6,21 +6,17 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    public float turnSpeed;
-    public float agressionRange;
-
-    [Header("Attack Data")]
-    public float attackRange;
-    public float attackMoveSpeed;
-
 
     [Header("Idle Info")]
     public float idleTime;
+    public float agressionRange;
 
     [Header("Move Info")]
     public float moveSpeed;
     public float chaseSpeed;
+    public float turnSpeed;
     private bool manualMovement;
+    private bool manualRotation;
     
     [SerializeField] private  Transform[] patrolPoints;
     private int currentPatrolIndex;
@@ -74,9 +70,12 @@ public class Enemy : MonoBehaviour
 
     public void ActivateManualMovement(bool _manualMovement) => this.manualMovement = _manualMovement;
     public bool ManualMovementActive() => manualMovement;
+    
+    public void ActiveManualRotation(bool _manualRotation) => this.manualRotation = _manualRotation;
+    
+    public bool ManualRotationActive() => manualRotation;
 
     public bool PlayerInAgressionRange() => Vector3.Distance(transform.position, player.position) < agressionRange;
-    public bool PlayerinAttackRange() => Vector3.Distance(transform.position, player.position) < attackRange;
 
     #region [======= Getters ========]
 
@@ -96,11 +95,10 @@ public class Enemy : MonoBehaviour
 
     #region [====== Gizmos ==========]
 
-    private void OnDrawGizmos()
+    protected virtual void OnDrawGizmos()
     {
         Gizmos.DrawWireSphere(transform.position, agressionRange);
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position, attackRange);
+
     }
     #endregion
 

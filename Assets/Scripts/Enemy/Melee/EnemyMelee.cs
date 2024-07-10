@@ -2,14 +2,31 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
+public struct AttackData
+{
+    public float attackRange;
+    public float moveSpeed;
+    public float attackIndex;
+    [Range(1,2)]
+    public float animationSpeed;
+}
+
+
 public class EnemyMelee : Enemy
 {
+
     public MeleeIdleState idleState { get; private set; } 
     public MeleeMoveState moveState { get; private set; }
 
     public MeleeRecoveryState recoveryState { get; private set; }
     public MeleeChaseState chaseState { get; private set; }
     public MeleeAttackState attackState { get; private set; }
+
+
+
+    [Header("Attack Data")]
+    public AttackData attackData;
 
 
     [SerializeField] private Transform hiddenWeapon;
@@ -46,4 +63,13 @@ public class EnemyMelee : Enemy
         hiddenWeapon.gameObject.SetActive(false);
         pulledWeapon.gameObject.SetActive(true);
     }
+
+    protected override void OnDrawGizmos()
+    {
+        base.OnDrawGizmos();
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, attackData.attackRange);
+    }
+
+    public bool PlayerInAttackRange() => Vector3.Distance(transform.position, player.position) < attackData.attackRange;
 }

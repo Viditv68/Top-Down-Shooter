@@ -1393,18 +1393,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98c638d46b3f6694085d9925487219e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  turnSpeed: 5
-  agressionRange: 4
-  attackRange: 1.5
-  attackMoveSpeed: 3.5
   idleTime: 2
+  agressionRange: 4
   moveSpeed: 1.5
   chaseSpeed: 4
+  turnSpeed: 5
   patrolPoints:
   - {fileID: 527930286}
   - {fileID: 422430863}
   - {fileID: 1957954400}
   player: {fileID: 1140953456}
+  attackData:
+    attackRange: 1
+    moveSpeed: 0.5
+    attackIndex: 1
+    animationSpeed: 1.482
   hiddenWeapon: {fileID: 1366100983}
   pulledWeapon: {fileID: 3174418330611183871}
 --- !u!195 &652893599

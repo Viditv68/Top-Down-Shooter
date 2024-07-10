@@ -29,7 +29,7 @@ public class MeleeChaseState : EnemyState
     {
         base.Update();
 
-        if(enemy.PlayerinAttackRange())
+        if(enemy.PlayerInAttackRange())
             stateMachine.ChangeState(enemy.attackState);
 
         enemy.transform.rotation = enemy.FaceTarget(GetNextPathPoint());
