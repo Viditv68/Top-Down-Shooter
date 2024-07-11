@@ -17,13 +17,14 @@ public class MeleeAttackState : EnemyState
     {
         base.Enter();
         enemy.PullWeapon();
+        attackMoveSpeed = enemy.attackData.moveSpeed;
+        enemy.anim.SetFloat("AttackAnimationSpeed", enemy.attackData.animationSpeed);
+        enemy.anim.SetFloat("AttackIndex", enemy.attackData.attackIndex);
+        
         enemy.agent.isStopped = true;
         enemy.agent.velocity = Vector3.zero;
 
-        attackMoveSpeed = enemy.attackData.moveSpeed;
 
-        enemy.anim.SetFloat("AttackAnimationSpeed", enemy.attackData.animationSpeed);
-        enemy.anim.SetFloat("AttackIndex", enemy.attackData.attackIndex);
 
         attackDirection = enemy.transform.position + (enemy.transform.forward * MAX_ATTACK_DISTANCE);
     }
@@ -31,11 +32,15 @@ public class MeleeAttackState : EnemyState
     public override void Exit()
     {
         base.Exit();
+        SetupNextAttack();
+    }
 
-        enemy.anim.SetFloat("RecoveryIndex", 0);
+    private void SetupNextAttack()
+    {
+        int recoveryIndex = PlayerClose() ? 1 : 0;
+        enemy.anim.SetFloat("RecoverIndex", recoveryIndex);
 
-        if (enemy.PlayerInAttackRange())
-            enemy.anim.SetFloat("RecoveryIndex", 1);
+        enemy.attackData = UpdatedAttackData();
     }
 
     public override void Update()
@@ -63,4 +68,22 @@ public class MeleeAttackState : EnemyState
         }
             
     }
+
+    private AttackData UpdatedAttackData()
+    {
+        List<AttackData> validAttacks = new List<AttackData>(enemy.attackList);
+
+
+        if(PlayerClose()) 
+        {
+            validAttacks.RemoveAll(x => x.attackType == AttackTypeMelee.Charge);
+        }
+
+        int random = Random.Range(0, validAttacks.Count);
+        return validAttacks[random];
+    }
+
+
+    private bool PlayerClose() => Vector3.Distance(enemy.transform.position, enemy.player.position) <= 1;
+
 }
