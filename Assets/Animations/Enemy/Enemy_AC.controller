@@ -541,7 +541,7 @@ BlendTree:
     m_CycleOffset: 0
     m_DirectBlendParameter: AttackAnimationSpeed
     m_Mirror: 0
-  m_BlendParameter: AttackAnimationSpeed
+  m_BlendParameter: RecoveryIndex
   m_BlendParameterY: AttackAnimationSpeed
   m_MinThreshold: 0
   m_MaxThreshold: 1

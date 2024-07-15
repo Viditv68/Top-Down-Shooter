@@ -1406,7 +1406,7 @@ MonoBehaviour:
   - {fileID: 422430863}
   - {fileID: 1957954400}
   player: {fileID: 1140953456}
-  meleeType: 2
+  meleeType: 3
   shieldTransform: {fileID: 5600572820082467690}
   dodgeCooldown: 5
   axePrefab: {fileID: 1256254374159962033, guid: 63f095f8b91ea4147864e9b527506eeb, type: 3}

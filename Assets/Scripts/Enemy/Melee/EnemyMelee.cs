@@ -46,7 +46,7 @@ public class EnemyMelee : Enemy
     public EnemyMelee_Type meleeType;
     public Transform shieldTransform;
     public float dodgeCooldown;
-    private float lastTimeDodge;
+    private float lastTimeDodge = -10f;
 
     [Header("Axe throw abolity")]
     public GameObject axePrefab;
@@ -91,6 +91,21 @@ public class EnemyMelee : Enemy
         base.Update();
 
         stateMachine.currentState.Update();
+
+        if(ShouldEnterBattleMode())
+        {
+            EnterBattleMode();
+        }
+    }
+
+    public override void EnterBattleMode()
+    {
+
+        if (inBattleMode)
+            return;
+
+        base.EnterBattleMode();
+        stateMachine.ChangeState(recoveryState);
     }
 
     public override void GetHit()
@@ -134,6 +149,9 @@ public class EnemyMelee : Enemy
         if (Vector3.Distance(transform.position, player.position) < 1.8f)
             return;
 
+
+        float dodgeAnimationDuration = GetAnimationClipDuration("Dodge Roll");
+
         if (Time.time > dodgeCooldown + lastTimeDodge)
         {
             lastTimeDodge = Time.time;
@@ -141,6 +159,21 @@ public class EnemyMelee : Enemy
 
         }
     }
+
+    private float GetAnimationClipDuration(string _clipName)
+    {
+        AnimationClip[] clips = anim.runtimeAnimatorController.animationClips;
+
+        foreach (AnimationClip clip in clips) 
+        {
+            if (clip.name == _clipName)
+                return clip.length;
+        }
+
+        Debug.Log(_clipName + "animation not found");
+        return 0;
+    }
+
 
     public bool CanThrowAxe()
     {

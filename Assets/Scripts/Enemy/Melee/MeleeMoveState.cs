@@ -30,14 +30,7 @@ public class MeleeMoveState : EnemyState
     {
         base.Update();
 
-        if (enemy.PlayerInAgressionRange())
-        {
-            stateMachine.ChangeState(enemy.recoveryState);
-            return;
-        }
-           
-
-        enemy.transform.rotation = enemy.FaceTarget(GetNextPathPoint());
+        enemy.FaceTarget(GetNextPathPoint());
 
         if(enemy.agent.remainingDistance <= enemy.agent.stoppingDistance + 0.5f)
         {

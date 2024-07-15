@@ -30,13 +30,5 @@ public class MeleeIdleState : EnemyState
             stateMachine.ChangeState(enemy.moveState);
         }
 
-
-        if (enemy.PlayerInAgressionRange())
-        {
-            stateMachine.ChangeState(enemy.recoveryState);
-            return;
-        }
-
-
     }
 }

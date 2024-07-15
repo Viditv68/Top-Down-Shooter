@@ -21,7 +21,10 @@ public class Enemy : MonoBehaviour
     private bool manualRotation;
     
     [SerializeField] private  Transform[] patrolPoints;
+    private Vector3[] patrolPointsPosition;
     private int currentPatrolIndex;
+
+    public bool inBattleMode {  get; private set; }
 
 
     public Transform player;
@@ -50,23 +53,42 @@ public class Enemy : MonoBehaviour
 
     }
 
+    protected bool ShouldEnterBattleMode()
+    {
+        bool inAggresionRange = Vector3.Distance(transform.position, player.position) < agressionRange;
+
+        if (inAggresionRange && !inBattleMode)
+        {
+            EnterBattleMode();
+            return true;
+        }
+
+        return false;
+    }
+
+    public virtual void EnterBattleMode()
+    {
+        inBattleMode = true;
+    }
+
+
     public virtual void GetHit()
     {
         healthPoints--;
     }
 
-    public virtual void HitImpact(Vector3 _force, Vector3 _hitPoint, Rigidbody _rb)
+    public virtual void DeathImpact(Vector3 _force, Vector3 _hitPoint, Rigidbody _rb)
     {
-        StartCoroutine(HitImpactCouroutine( _force, _hitPoint, _rb));
+        StartCoroutine(DeathImpactCouroutine( _force, _hitPoint, _rb));
     }
 
-    private IEnumerator HitImpactCouroutine(Vector3 _force, Vector3 _hitPoint, Rigidbody _rb)
+    private IEnumerator DeathImpactCouroutine(Vector3 _force, Vector3 _hitPoint, Rigidbody _rb)
     {
         yield return new WaitForSeconds(0.1f);
 
         _rb.AddForceAtPosition(_force, _hitPoint, ForceMode.Impulse);
     }
-    public Quaternion FaceTarget(Vector3 _target)
+    public void FaceTarget(Vector3 _target)
     {
         Quaternion targetRotation = Quaternion.LookRotation(_target - transform.position);
 
@@ -74,36 +96,29 @@ public class Enemy : MonoBehaviour
 
         float yRotation = Mathf.LerpAngle(currentEulerAngles.y, targetRotation.eulerAngles.y, turnSpeed * Time.deltaTime);
 
-        return Quaternion.Euler(currentEulerAngles.x, yRotation, currentEulerAngles.z);
+        transform.rotation = Quaternion.Euler(currentEulerAngles.x, yRotation, currentEulerAngles.z);
     }
 
-    public virtual void AbilityTrigger()
-    {
-        stateMachine.currentState.AbilityTrigger();
-    }
+
+
+    #region [======= Patrol ========]
+
 
     private void InitializePatrolPoints()
     {
-        foreach (var t in patrolPoints)
+        patrolPointsPosition = new Vector3[patrolPoints.Length];
+
+        for (int i = 0; i < patrolPoints.Length; i++)
         {
-            t.parent = null;
+            patrolPointsPosition[i] = patrolPoints[i].position;
+            patrolPoints[i].gameObject.SetActive(false);
         }
     }
 
-    public void ActivateManualMovement(bool _manualMovement) => this.manualMovement = _manualMovement;
-    public bool ManualMovementActive() => manualMovement;
-    
-    public void ActiveManualRotation(bool _manualRotation) => this.manualRotation = _manualRotation;
-    
-    public bool ManualRotationActive() => manualRotation;
-
-    public bool PlayerInAgressionRange() => Vector3.Distance(transform.position, player.position) < agressionRange;
-
-    #region [======= Getters ========]
 
     public Vector3 GetPatrolDestination()
     {
-        Vector3 destination = patrolPoints[currentPatrolIndex].transform.position;
+        Vector3 destination = patrolPointsPosition[currentPatrolIndex];
         currentPatrolIndex++;
 
         if (currentPatrolIndex >= patrolPoints.Length)
@@ -126,6 +141,16 @@ public class Enemy : MonoBehaviour
 
     #region [====== Animation Events =======]
 
+    public void ActivateManualMovement(bool _manualMovement) => this.manualMovement = _manualMovement;
+    public bool ManualMovementActive() => manualMovement;
+    public bool ManualRotationActive() => manualRotation;
+
+    public void ActiveManualRotation(bool _manualRotation) => this.manualRotation = _manualRotation;
     public void Animationtrigger() => stateMachine.currentState.AnimationTrigger();
+    public virtual void AbilityTrigger()
+    {
+        stateMachine.currentState.AbilityTrigger();
+    }
+
     #endregion
 }

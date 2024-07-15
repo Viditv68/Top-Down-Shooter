@@ -78,7 +78,7 @@ public class Bullet : MonoBehaviour
             Vector3 force = rb.velocity.normalized * impactForce;
             Rigidbody hitRigidbody = collision.collider.attachedRigidbody;
             enemy.GetHit();
-            enemy.HitImpact(force, collision.contacts[0].point, hitRigidbody);
+            enemy.DeathImpact(force, collision.contacts[0].point, hitRigidbody);
         }
 
 

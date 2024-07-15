@@ -34,13 +34,18 @@ public class MeleeDeathState : EnemyState
     public override void Update()
     {
         base.Update();
+        DisableInteractionIfShould();
 
-        if (stateTimer < 0 && !interactionDisabled)
+    }
+
+    private void DisableInteractionIfShould()
+    {
+        if (stateTimer >= 0 || interactionDisabled)
         {
-            interactionDisabled = true;
-            ragdoll.RagdollActive(false);
-            ragdoll.CollidersActive(false);
+            return;
         }
-
+        interactionDisabled = true;
+        ragdoll.RagdollActive(false);
+        ragdoll.CollidersActive(false);
     }
 }

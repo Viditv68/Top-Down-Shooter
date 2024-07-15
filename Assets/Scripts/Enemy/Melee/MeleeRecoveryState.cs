@@ -25,7 +25,7 @@ public class MeleeRecoveryState : EnemyState
     {
         base.Update();
 
-        enemy.transform.rotation = enemy.FaceTarget(enemy.player.position);
+        enemy.FaceTarget(enemy.player.position);
 
         if(triggerCalled)
         {
