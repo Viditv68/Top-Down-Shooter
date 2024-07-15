@@ -30,6 +30,7 @@ public class EnemyMelee : Enemy
     public MeleeRecoveryState recoveryState { get; private set; }
     public MeleeChaseState chaseState { get; private set; }
     public MeleeAttackState attackState { get; private set; }
+    public MeleeDeathState deathState { get; private set; }
 
 
 
@@ -50,6 +51,7 @@ public class EnemyMelee : Enemy
         recoveryState = new MeleeRecoveryState(this, stateMachine, "Recovery");
         chaseState = new MeleeChaseState(this, stateMachine, "Chase");
         attackState = new MeleeAttackState(this, stateMachine, "Attack");
+        deathState = new MeleeDeathState(this, stateMachine, "Idle");
     }
 
     protected override void Start()
@@ -65,6 +67,11 @@ public class EnemyMelee : Enemy
         base.Update();
 
         stateMachine.currentState.Update();
+    }
+
+    public override void GetHit()
+    {
+        stateMachine.ChangeState(deathState);
     }
 
     public void PullWeapon()

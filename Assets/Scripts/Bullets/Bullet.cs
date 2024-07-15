@@ -2,9 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class Bullet : MonoBehaviour
 {
+    public float impactForce;
+
     [SerializeField] private Rigidbody rb;
     [SerializeField] private GameObject bulletImpactFX;
     [SerializeField] private TrailRenderer trailRenderer;
@@ -14,8 +17,9 @@ public class Bullet : MonoBehaviour
     private Vector3 startPosition;
     private float flyDistance;
     private bool bulletDisable;
-    public void BulletSetup(float _flyDistance)
+    public void BulletSetup(float _flyDistance, float _impactForce)
     {
+        this.impactForce = _impactForce;
         bulletDisable = false;
         cd.enabled = true;
         meshRenderer.enabled = true;
@@ -57,6 +61,17 @@ public class Bullet : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        Enemy enemy = collision.gameObject.GetComponentInParent<Enemy>();
+
+        if (enemy != null)
+        {
+
+            Vector3 force = rb.velocity.normalized * impactForce;
+            Rigidbody hitRigidbody = collision.collider.attachedRigidbody;
+            enemy.GetHit();
+            enemy.HitImpact(force, collision.contacts[0].point, hitRigidbody);
+        }
+
         CreateImpactFx(collision);
         ReturnBulletToPool();
 

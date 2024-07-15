@@ -48,6 +48,22 @@ public class Enemy : MonoBehaviour
 
     }
 
+    public virtual void GetHit()
+    {
+        //Debug.Log(gameObject.name + "get hit");
+    }
+
+    public virtual void HitImpact(Vector3 _force, Vector3 _hitPoint, Rigidbody _rb)
+    {
+        StartCoroutine(HitImpactCouroutine( _force, _hitPoint, _rb));
+    }
+
+    private IEnumerator HitImpactCouroutine(Vector3 _force, Vector3 _hitPoint, Rigidbody _rb)
+    {
+        yield return new WaitForSeconds(0.1f);
+
+        _rb.AddForceAtPosition(_force, _hitPoint, ForceMode.Impulse);
+    }
     public Quaternion FaceTarget(Vector3 _target)
     {
         Quaternion targetRotation = Quaternion.LookRotation(_target - transform.position);
