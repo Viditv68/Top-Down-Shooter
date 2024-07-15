@@ -29,8 +29,10 @@ public class MeleeRecoveryState : EnemyState
 
         if(triggerCalled)
         {
-            if (enemy.PlayerInAttackRange())
-                stateMachine.ChangeState(enemy.attackState);
+            if(enemy.CanThrowAxe())
+                stateMachine.ChangeState(enemy.abilityState);
+            else if (enemy.PlayerInAttackRange())
+                 stateMachine.ChangeState(enemy.attackState);
             else
                 stateMachine.ChangeState(enemy.chaseState);
         }

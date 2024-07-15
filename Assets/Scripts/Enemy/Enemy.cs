@@ -77,6 +77,10 @@ public class Enemy : MonoBehaviour
         return Quaternion.Euler(currentEulerAngles.x, yRotation, currentEulerAngles.z);
     }
 
+    public virtual void AbilityTrigger()
+    {
+        stateMachine.currentState.AbilityTrigger();
+    }
 
     private void InitializePatrolPoints()
     {
