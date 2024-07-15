@@ -21,6 +21,12 @@ public enum AttackTypeMelee
 }
 
 
+public enum EnemyMelee_Type
+{
+    Regular,
+    Shield
+}
+
 public class EnemyMelee : Enemy
 {
 
@@ -32,7 +38,9 @@ public class EnemyMelee : Enemy
     public MeleeAttackState attackState { get; private set; }
     public MeleeDeathState deathState { get; private set; }
 
-
+    [Header("Enemy Settings")]
+    public EnemyMelee_Type meleeType;
+    public Transform shieldTransform;
 
     [Header("Attack Data")]
     public AttackData attackData;
@@ -59,7 +67,7 @@ public class EnemyMelee : Enemy
         base.Start();
         Debug.Log("Enemy initalize");
         stateMachine.Initialize(idleState);
-
+        InitializeSpeciality();
     }
 
     protected override void Update()
@@ -71,7 +79,19 @@ public class EnemyMelee : Enemy
 
     public override void GetHit()
     {
-        stateMachine.ChangeState(deathState);
+        base.GetHit();
+        if(healthPoints <= 0)
+            stateMachine.ChangeState(deathState);
+    }
+
+    private void InitializeSpeciality()
+    {
+        if(meleeType == EnemyMelee_Type.Shield)
+        {
+            anim.SetFloat("ChaseIndex", 1);
+            Debug.Log("ChaseIndex 1");
+            shieldTransform.gameObject.SetActive(true);
+        }
     }
 
     public void PullWeapon()

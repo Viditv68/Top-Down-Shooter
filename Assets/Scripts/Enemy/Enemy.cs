@@ -7,6 +7,8 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
 
+    [SerializeField] protected int healthPoints = 20;
+
     [Header("Idle Info")]
     public float idleTime;
     public float agressionRange;
@@ -50,7 +52,7 @@ public class Enemy : MonoBehaviour
 
     public virtual void GetHit()
     {
-        //Debug.Log(gameObject.name + "get hit");
+        healthPoints--;
     }
 
     public virtual void HitImpact(Vector3 _force, Vector3 _hitPoint, Rigidbody _rb)

@@ -15,6 +15,7 @@ public class MeleeChaseState : EnemyState
 
     public override void Enter()
     {
+
         base.Enter();
         enemy.agent.speed = enemy.chaseSpeed;
         enemy.agent.isStopped = false;
@@ -50,4 +51,5 @@ public class MeleeChaseState : EnemyState
 
         return false;
     }
+
 }
